@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClassLab ODV - Divulgazione Scientifica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset e impostazioni generali */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* --- MENU DI NAVIGAZIONE --- */
+    nav {
+      background-color: #0284c7;
+      color: white;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      background: white;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #0284c7;
+      font-size: 14px;
+    }
+    .nav-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      opacity: 0.8;
+      font-weight: 600;
+    }
+    /* Menu hamburger per mobile */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* --- CONTENUTO PRINCIPALE / HERO --- */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .hero-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    /* --- GRIGLIA STATISTICHE --- */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 25px 15px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    }
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0284c7;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* --- GRIGLIA LE 3 CARD --- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 30px 25px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: #0284c7;
+    }
+    .feature-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+    .feature-text {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* --- MEDIA QUERIES PER TELEFONI --- */
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none; /* Semplificato per ora, poi aggiungiamo il toggle a tendina se serve */
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+    @media (max-width: 500px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        padding: 12px 15px;
+      }
+      .nav-title {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DI NAVIGAZIONE ISPIRata al tuo menu -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">🧪</div>
+      <span class="nav-title">ClassLab ODV</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="partecipa.html">Partecipa</a></li>
+      <li><a href="laboratori.html">I nostri laboratori</a></li>
+      <li><a href="edizioni.html">Edizioni passate</a></li>
+      <li><a href="chisiamo.html">Chi siamo</a></li>
+    </ul>
+    <button class="menu-toggle">☰</button>
+  </nav>
+
+  <!-- CONTENUTO PRINCIPALE -->
+  <div class="container">
+    
+    <div class="hero-section">
+      <span class="badge">Perché sceglierci</span>
+      <h1 class="hero-title">Cosa rende ClassLab unico</h1>
+    </div>
+
+    <!-- Statistiche -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">+2000</div>
+        <div class="stat-label">Studenti partecipanti</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">+80</div>
+        <div class="stat-label">Classi aderenti</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Province attive</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Studenti-divulgatori</div>
+      </div>
+    </div>
+
+    <!-- Le 3 Card -->
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-title">Scienza ed Esperimenti Reali</div>
+        <p class="feature-text">Portiamo veri strumenti da laboratorio direttamente tra i banchi di scuola così che gli studenti tocchino con mano ed esperimentino in prima persona.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Peer Education Coinvolgente</div>
+        <p class="feature-text">I ragazzi si interfacciano con giovani formatori appassionati, creando un clima dinamico, informale e privo delle classiche barriere della cattedra.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">100% Gratuito per le Scuole</div>
+        <p class="feature-text">Crediamo che la scienza debba essere accessibile a chiunque. Per questo motivo tutte le nostre attività sono completamente gratuite.</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
