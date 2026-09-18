@@ -491,11 +491,24 @@
       var urlScript = "https://script.google.com/macros/s/AKfycbxLiMfFz_pmAGYJV8zEvqssst9wohLLKkfku0rKlTnyYn57dMfUiNyKyPHBSvayhjLb/exec"; 
       var formData = new FormData(this);
 
+// Invio sicuro via AJAX con no-cors per evitare il blocco del browser
+    document.getElementById("classlabForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      var btn = document.getElementById("btnInvia");
+      btn.disabled = true;
+      btn.innerText = "Invio in corso...";
+
+      var urlScript = "https://script.google.com/macros/library/d/1ofVPBHlCjo4oFbUlO9o_3xYFwaPChiHVJh2kqQMkU-h7ZmL1Kh71KdkO/3"; 
+      var formData = new FormData(this);
+
       fetch(urlScript, {
         method: "POST",
+        mode: "no-cors", // <--- Fondamentale per saltare il controllo CORS
         body: formData
       })
-      .then(response => {
+      .then(() => {
+        // Mostra il messaggio di successo indipendentemente dalla risposta opaca di Google
         document.getElementById("classlabForm").innerHTML = `
           <div style="text-align: center; padding: 40px 20px;">
             <h3 style="font-family: 'Montserrat', sans-serif; color: #0284c7; font-size: 24px; margin-bottom: 15px;">Richiesta inviata con successo!</h3>
