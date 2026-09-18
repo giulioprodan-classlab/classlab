@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* Reset e impostazioni generali */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -40,17 +39,12 @@
       text-decoration: none;
       color: white;
     }
-    .nav-logo {
+    .nav-logo-img {
       width: 36px;
       height: 36px;
-      background: white;
       border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #0284c7;
-      font-size: 14px;
+      object-fit: cover;
+      background: white;
     }
     .nav-title {
       font-size: 20px;
@@ -74,23 +68,57 @@
       opacity: 0.8;
       font-weight: 600;
     }
-    /* Menu hamburger per mobile */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
+
+    /* --- HERO SECTION CON SFONDO --- */
+    .hero-banner {
+      position: relative;
+      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), url('sfondo.jpg') center/cover no-repeat;
       color: white;
-      font-size: 24px;
-      cursor: pointer;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      color: #e2e8f0;
+    }
+    .hero-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #0f172a;
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .hero-btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
     }
 
-    /* --- CONTENUTO PRINCIPALE / HERO --- */
+    /* --- CONTENUTO PRINCIPALE --- */
     .container {
       max-width: 1100px;
-      margin: 40px auto;
+      margin: 50px auto;
       padding: 0 20px;
     }
-    .hero-section {
+    .section-header {
       text-align: center;
       margin-bottom: 40px;
     }
@@ -106,11 +134,10 @@
       margin-bottom: 12px;
       letter-spacing: 0.5px;
     }
-    .hero-title {
-      font-size: 32px;
+    .section-title {
+      font-size: 30px;
       font-weight: 800;
       color: #0f172a;
-      margin-bottom: 10px;
       letter-spacing: -0.5px;
     }
 
@@ -146,6 +173,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 25px;
+      margin-bottom: 70px;
     }
     .feature-card {
       background: #ffffff;
@@ -171,40 +199,88 @@
       line-height: 1.5;
     }
 
-    /* --- MEDIA QUERIES PER TELEFONI --- */
-    @media (max-width: 900px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      .nav-links {
-        display: none; /* Semplificato per ora, poi aggiungiamo il toggle a tendina se serve */
-      }
-      .menu-toggle {
-        display: block;
-      }
+    /* --- SEZIONE FINANZIATORI E SUPPORTO --- */
+    .sponsors-section {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 50px;
+      margin-top: 40px;
+      text-align: center;
     }
-    @media (max-width: 500px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-      nav {
-        padding: 12px 15px;
-      }
-      .nav-title {
-        font-size: 17px;
-      }
+    .sponsor-category-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+    }
+    .sponsor-main {
+      margin-bottom: 40px;
+    }
+    .sponsor-logo-box {
+      display: inline-block;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .sponsor-logo-box:hover {
+      transform: translateY(-2px);
+      border-color: #0284c7;
+    }
+    .sponsor-logo-box img {
+      max-height: 50px;
+      width: auto;
+      display: block;
+    }
+    .sponsors-grid-support {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .support-logo-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .support-logo-box:hover {
+      transform: translateY(-2px);
+      border-color: #0284c7;
+    }
+    .support-logo-box img {
+      max-height: 45px;
+      max-width: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: 1fr; }
+      .sponsors-grid-support { grid-template-columns: 1fr; }
+      .hero-title { font-size: 28px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- BARRA DI NAVIGAZIONE ISPIRata al tuo menu -->
+  <!-- BARRA DI NAVIGAZIONE -->
   <nav>
     <a href="index.html" class="nav-brand">
-      <div class="nav-logo">🧪</div>
+      <!-- Sostituisci 'icona.png' con il nome esatto della nuova immagine dell'icona -->
+      <img src="icona.png" alt="ClassLab Logo" class="nav-logo-img">
       <span class="nav-title">ClassLab ODV</span>
     </a>
     <ul class="nav-links">
@@ -214,15 +290,23 @@
       <li><a href="edizioni.html">Edizioni passate</a></li>
       <li><a href="chisiamo.html">Chi siamo</a></li>
     </ul>
-    <button class="menu-toggle">☰</button>
   </nav>
 
+  <!-- HERO SECTION CON SFONDO -->
+  <header class="hero-banner">
+    <div class="hero-content">
+      <h1 class="hero-title">ClassLab ODV: Innovazione, Educazione e Laboratori Scientifici per le scuole</h1>
+      <p class="hero-subtitle">Promuoviamo la curiosità e il sapere scientifico attraverso esperienze pratiche e peer education per studenti di ogni età del Friuli Venezia Giulia e non solo</p>
+      <a href="laboratori.html" class="hero-btn">Esplora i laboratori</a>
+    </div>
+  </header>
+
   <!-- CONTENUTO PRINCIPALE -->
-  <div class="container">
+  <main class="container">
     
-    <div class="hero-section">
+    <div class="section-header">
       <span class="badge">Perché sceglierci</span>
-      <h1 class="hero-title">Cosa rende ClassLab unico</h1>
+      <h2 class="section-title">Cosa rende ClassLab unico</h2>
     </div>
 
     <!-- Statistiche -->
@@ -261,7 +345,44 @@
       </div>
     </div>
 
-  </div>
+    <!-- SEZIONE FINANZIATORI E SUPPORTO -->
+    <section class="sponsors-section">
+      
+      <!-- Finanziamento Principale -->
+      <div class="sponsor-main">
+        <div class="sponsor-category-title">Con il finanziamento di</div>
+        <!-- Sostituisci 'pittini.png' con il nome esatto del file immagine della Fondazione Pittini -->
+        <a href="https://www.fondazionepittini.it" target="_blank" class="sponsor-logo-box">
+          <img src="pittini.png" alt="Fondazione Pietro Pittini">
+        </a>
+      </div>
+
+      <!-- Supporto -->
+      <div>
+        <div class="sponsor-category-title">E con il supporto di</div>
+        <div class="sponsors-grid-support">
+          
+          <!-- ICTP SciFabLab -->
+          <a href="https://scifablab.ictp.it" target="_blank" class="support-logo-box">
+            <img src="ictp.png" alt="ICTP SciFabLab">
+          </a>
+
+          <!-- AIRC -->
+          <a href="https://www.airc.it" target="_blank" class="support-logo-box">
+            <img src="airc.png" alt="Fondazione AIRC">
+          </a>
+
+          <!-- DIPLE -->
+          <a href="https://www.diple.it" target="_blank" class="support-logo-box">
+            <img src="diple.png" alt="DIPLE">
+          </a>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
 
 </body>
 </html>
