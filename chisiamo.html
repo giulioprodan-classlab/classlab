@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassLab - Chi Siamo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #334155;
+            background-color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        /* --- SEZIONE INTESTAZIONE CON GRUPPO --- */
+        .about-hero {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-image: url('gruppo.jpg'); /* Assicurati che il nome file corrisponda */
+            background-size: cover;
+            background-position: center 30%; /* Ottimizzato per mostrare i volti */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Overlay scuro per far risaltare il testo */
+        }
+
+        .about-hero h1 {
+            position: relative;
+            color: #ffffff;
+            font-size: 48px;
+            font-weight: 700;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+
+        /* --- CONTENITORE PRINCIPALE --- */
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* --- STORIA DEL PROGETTO --- */
+        .about-intro {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 60px;
+        }
+
+        .about-intro p {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .about-intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- SEZIONE MEMBRI DEL TEAM --- */
+        .team-title {
+            font-size: 32px;
+            color: #0284c7;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .team-card {
+            background: #ffffff;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .team-img-container {
+            width: 280px;
+            min-width: 280px;
+            height: 280px;
+            overflow: hidden;
+            background-color: #e2e8f0;
+        }
+
+        .team-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .team-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .team-content h3 {
+            font-size: 24px;
+            color: #0284c7;
+            margin-bottom: 12px;
+            font-weight: 700;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .team-content p {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* --- RESPONSIVE PER DISPOSITIVI MOBILI --- */
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 280px;
+            }
+            .about-hero h1 {
+                font-size: 36px;
+            }
+            .team-card {
+                flex-direction: column;
+            }
+            .team-img-container {
+                width: 100%;
+                height: 250px;
+            }
+            .about-intro {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Intestazione con Foto Gruppo -->
+    <header class="about-hero">
+        <h1>Chi siamo</h1>
+    </header>
+
+    <main class="about-container">
+        <!-- Testo di presentazione -->
+        <section class="about-intro">
+            <p>Il progetto nasce nel 2022 al Liceo Scientifico Galileo Galilei di Trieste dall’iniziativa di un gruppo di studenti, con l’obiettivo di portare nelle scuole un modo diverso di avvicinarsi alla biologia. Da allora ClassLab è cresciuto, trasformandosi in un progetto di peer education: sono gli studenti più grandi, adeguatamente formati, a entrare nelle classi e a guidare i più piccoli attraverso esperimenti, osservazioni al microscopio e attività pratiche.</p>
+            <p>Oggi ClassLab è un’Organizzazione di Volontariato indipendente e continua a crescere mantenendo la stessa idea da cui tutto è partito: avvicinare i più giovani alla scienza attraverso la curiosità, l’esperienza e il confronto tra studenti.</p>
+        </section>
+
+        <h2 class="team-title">Il Team</h2>
+
+        <!-- Giulio Prodan -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Giulio.png" alt="Giulio Prodan">
+            </div>
+            <div class="team-content">
+                <h3>Giulio Prodan</h3>
+                <p>Studente di Medicina ha fondato ClassLab nel 2022 per colmare il divario tra teoria e pratica, consentendo ai bambini non solo di comprendere la biologia, ma di viverla in maniera divertente. Da 4 anni collabora con il dipartimento di comunicazione scientifica dell’International Center for Genetic Engineering and Biotechnology e dal 2024 si occupa di prevenzione e sensibilizzazione per la Croce Rossa Italiana.</p>
+                <p style="margin-top: 10px;">Nel 2024, grazie a ClassLab, è stato nominato Alfiere della Repubblica Italiana dal Presidente Sergio Mattarella, un riconoscimento che considera un incoraggiamento a continuare a costruire ponti tra il sapere e le nuove generazioni.</p>
+            </div>
+        </article>
+
+        <!-- Matilde Marsich -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Matilde.jpg" alt="Matilde Marsich">
+            </div>
+            <div class="team-content">
+                <h3>Matilde Marsich</h3>
+                <p>Studentessa di Fisica, ha preso parte al progetto di ClassLab nel 2023. Ama sfidare la gravità sulle pareti rocciose e tra una scalata e l'altra trova la sua calma creando meraviglie all'uncinetto.</p>
+                <p style="margin-top: 10px;">Unione tra forza e creatività che danno luogo a una persona piena di allegria e disponibilità.</p>
+            </div>
+        </article>
+
+        <!-- Anna Decarli -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Anna.jpg" alt="Anna Decarli">
+            </div>
+            <div class="team-content">
+                <h3>Anna Decarli</h3>
+                <p>Studentessa di Medicina. Oltre allo studio, dedica parte del suo tempo al volontariato, un'attività che le permette di mettersi al servizio degli altri e di contribuire in modo concreto alla comunità. È stata la prima a far parte del team di ClassLab, dove collabora dal 2023 con gli altri studenti in progetti innovativi unendo creatività, tecnologia e formazione.</p>
+            </div>
+        </article>
+
+        <!-- Silvio Ambrosio -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Silvio.jpg" alt="Silvio Ambrosio">
+            </div>
+            <div class="team-content">
+                <h3>Silvio Ambrosio</h3>
+                <p>È appassionato del mare, sia sopra, che sotto. Un tuttofare per eccellenza, dal 2025 è entrato a fare parte del team ClassLab per condividere la sua passione per le nuove esperienze, per la creatività e per la scienza.</p>
+            </div>
+        </article>
+
+        <!-- Davide Costanzo -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Davide.jpg" alt="Davide Costanzo">
+            </div>
+            <div class="team-content">
+                <h3>Davide Costanzo</h3>
+                <p>Studente di Fisica, appassionato di montagna in tutte le sue forme: dall’arrampicata allo sci, dalla corsa al ciclismo. Nel tempo libero si mette a servizio della propria comunità, trovando nello stare con gli altri un’occasione di crescita. Dal 2025 fa parte del team ClassLab, dove porta entusiasmo e intraprendenza, con il desiderio di condividere esperienze e conoscenza.</p>
+            </div>
+        </article>
+
+        <!-- Daniele Pavanello -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Daniele.jpg" alt="Daniele Pavanello">
+            </div>
+            <div class="team-content">
+                <h3>Daniele Pavanello</h3>
+                <p>Studente di Fisica. Si cimenta nell’arrampicata, nel ciclismo e nelle attività subacquee. In continua ricerca di nuove esperienze e attività, dal 2025 è entrato a far parte del team di ClassLab per condividere entusiasmo e il suo interesse verso la scienza.</p>
+            </div>
+        </article>
+
+        <!-- Gabriele Tedesco -->
+        <article class="team-card">
+            <div class="team-img-container">
+                <img src="Gabriele.jpg" alt="Gabriele Tedesco">
+            </div>
+            <div class="team-content">
+                <h3>Gabriele Tedesco</h3>
+                <p>Ingegnere industriale, insegnante, divulgatore e specialista nella comunicazione ha avuto un ruolo fondamentale nello sviluppo di ClassLab aiutando a trasformare un'idea in qualcosa di concreto.</p>
+            </div>
+        </article>
+    </main>
+
+</body>
+</html>
