@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partecipa - ClassLab ODV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* --- MENU DI NAVIGAZIONE --- */
+    nav {
+      background-color: #0284c7;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+    .nav-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: white;
+    }
+    .nav-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    /* Pulsante Hamburger per Mobile */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 5px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* --- MODULO DI ADESIONE --- */
+    .classlab-form-container {
+      max-width: 850px;
+      margin: 40px auto;
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+      box-sizing: border-box;
+      color: #0f172a;
+    }
+    .classlab-form-header { text-align: center; margin-bottom: 35px; }
+    .classlab-form-badge { display: inline-block; background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 700; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .classlab-form-title { font-size: 26px; font-weight: 800; color: #0f172a; margin: 0 0 10px 0; letter-spacing: -0.5px; }
+    .classlab-form-subtitle { font-size: 14px; color: #64748b; line-height: 1.6; margin: 0 auto; max-width: 700px; }
+    .form-section-title { font-size: 16px; font-weight: 700; color: #0369a1; border-bottom: 2px solid #e0f2fe; padding-bottom: 8px; margin: 35px 0 20px 0; }
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%; padding: 12px 14px; font-family: 'Montserrat', sans-serif; font-size: 14px; color: #0f172a; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #0284c7; background: #ffffff; box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.1); }
+    textarea { resize: vertical; height: 90px; }
+    .info-box { background: #f8fafc; border-left: 4px solid #0284c7; padding: 16px; font-size: 13px; color: #475569; line-height: 1.6; border-radius: 0 8px 8px 0; margin-bottom: 25px; }
+    .disclaimer-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px; font-size: 13px; color: #92400e; line-height: 1.5; border-radius: 0 8px 8px 0; margin-bottom: 20px; font-weight: 500; }
+    .privacy-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; font-size: 12px; color: #475569; line-height: 1.5; max-height: 160px; overflow-y: auto; margin-bottom: 15px; }
+    .dynamic-section { display: none; background: #fdfdfd; border: 1px dashed #cbd5e1; padding: 20px; border-radius: 12px; margin-top: 15px; margin-bottom: 20px; }
+    .class-card { background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+    .class-card-title { font-weight: 700; color: #0f172a; font-size: 15px; margin-bottom: 12px; }
+    .submit-btn { display: block; width: 100%; background: #0284c7; color: white; font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; padding: 15px; border: none; border-radius: 8px; cursor: pointer; margin-top: 30px; }
+    .submit-btn:hover { background: #0369a1; }
+    
+    /* Box Candidatura Studenti */
+    .student-join-box {
+      margin-top: 35px;
+      padding: 20px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      color: #166534;
+      line-height: 1.6;
+    }
+    .student-join-box a {
+      color: #15803d;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .student-join-box a:hover {
+      color: #166534;
+    }
+
+    /* Responsive Design per Menu Mobile */
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #0284c7;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 25px;
+        gap: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        font-size: 16px;
+        width: 100%;
+        padding: 5px 0;
+      }
+    }
+
+    @media (max-width: 768px) { 
+      .form-row { grid-template-columns: 1fr; } 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DI NAVIGAZIONE -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <img src="icona.png" alt="ClassLab Logo" class="nav-logo-img">
+      <span class="nav-title">ClassLab ODV</span>
+    </a>
+    
+    <button class="menu-toggle" id="menuToggle" aria-label="Apri menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="partecipa.html" class="active">Partecipa</a></li>
+      <li><a href="laboratori.html">I nostri laboratori</a></li>
+      <li><a href="edizioni.html">Edizioni passate</a></li>
+      <li><a href="chisiamo.html">Chi siamo</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENUTO PRINCIPALE / MODULO -->
+  <div class="classlab-form-container">
+    <div class="classlab-form-header">
+      <span class="classlab-form-badge">ClassLab • Modulo di Adesione</span>
+      <h2 class="classlab-form-title">Richiedi di portare ClassLab nella tua scuola</h2>
+      <p class="classlab-form-subtitle">Compila il modulo per raccontarci le classi, i laboratori d'interesse e le giornate disponibili. L'attività è gratuita!</p>
+    </div>
+
+    <div class="info-box">
+      <strong>Come funziona:</strong> L'invio del modulo non costituisce una prenotazione. Durata fissa: 2 ore per classe (3 laboratori + introduzione). Periodo disponibile: <strong>dal 12 dicembre al 1° marzo</strong>.
+    </div>
+
+    <!-- Form gestito via AJAX -->
+    <form id="classlabForm">
+
+      <div class="form-section-title">1. Informazioni di contatto e istituto</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nome">Nome e cognome del referente *</label>
+          <input type="text" id="nome" name="nome" placeholder="Mario Rossi" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email di contatto *</label>
+          <input type="email" id="email" name="email" placeholder="mario.rossi@scuola.edu.it" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telefono">Numero di telefono *</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="+39 ..." required>
+        </div>
+        <div class="form-group">
+          <label for="comune">Comune *</label>
+          <input type="text" id="comune" name="comune" placeholder="Es. Trieste" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="scuola">Scuola *</label>
+          <input type="text" id="scuola" name="scuola" placeholder="Es. IC San Giovanni" required>
+        </div>
+        <div class="form-group">
+          <label for="ordineGrado">Ordine e grado *</label>
+          <select id="ordineGrado" name="ordine" onchange="gestisciOrdineGrado()" required>
+            <option value="" disabled selected>Seleziona ordine...</option>
+            <option value="Primaria">Primaria</option>
+            <option value="Secondaria di primo grado">Secondaria di primo grado</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SEZIONE PRIMARIA -->
+      <div id="sezionePrimaria" class="dynamic-section">
+        <div class="form-section-title" style="margin-top: 0;">Scuola Primaria - Scelta Laboratori</div>
+        
+        <div class="disclaimer-box">
+          Selezionare solo le classi che si vogliono iscrivere lasciando in bianco le altre.
+        </div>
+
+        <!-- Classi Quarte (4A - 4E) -->
+        <script>
+          var opzioniPrimaria4 = `
+            <option value="">-- Seleziona --</option>
+            <option value="Estrazione del DNA della banana">Estrazione del DNA della banana</option>
+            <option value="Isolamento dei pigmenti">Isolamento dei pigmenti</option>
+            <option value="Osservazione di cellule epiteliali umane">Osservazione di cellule epiteliali umane</option>
+            <option value="Osservazione di cellule epiteliali vegetale">Osservazione di cellule epiteliali vegetale</option>
+            <option value="Simulazione dei processi digestivi">Simulazione dei processi digestivi</option>
+            <option value="Caccia ai batteri!">Caccia ai batteri!</option>
+            <option value="Il canestro della prevenzione (AIRC)">Il canestro della prevenzione (AIRC)</option>
+            <option value="Preferisco farmi consigliare dal team ClassLab">Preferisco farmi consigliare</option>
+          `;
+          function generaBloccoClasse(nomeClasse, idPrefix) {
+            return `
+              <div class="class-card">
+                <div class="class-card-title">🧪 Classe ${nomeClasse}</div>
+                <div class="form-row">
+                  <div class="form-group"><label>Opzione 1</label><select name="op1_${idPrefix}">${opzioniPrimaria4}</select></div>
+                  <div class="form-group"><label>Opzione 2</label><select name="op2_${idPrefix}">${opzioniPrimaria4}</select></div>
+                </div>
+                <div class="form-group" style="margin-bottom:0;"><label>Opzione 3</label><select name="op3_${idPrefix}">${opzioniPrimaria4}</select></div>
+              </div>
+            `;
+          }
+          document.write(generaBloccoClasse("4ª A", "4a"));
+          document.write(generaBloccoClasse("4ª B", "4b"));
+          document.write(generaBloccoClasse("4ª C", "4c"));
+          document.write(generaBloccoClasse("4ª D", "4d"));
+          document.write(generaBloccoClasse("4ª E", "4e"));
+        </script>
+
+        <!-- Classi Quinte (5A - 5E) -->
+        <script>
+          var opzioniPrimaria5 = `
+            <option value="">-- Seleziona --</option>
+            <option value="Estrazione del DNA della banana">Estrazione del DNA della banana</option>
+            <option value="Isolamento dei pigmenti">Isolamento dei pigmenti</option>
+            <option value="Osservazione di cellule epiteliali umane">Osservazione di cellule epiteliali umane</option>
+            <option value="Osservazione di cellule epiteliali vegetale">Osservazione di cellule epiteliali vegetale</option>
+            <option value="Simulazione dei processi digestivi">Simulazione dei processi digestivi</option>
+            <option value="Caccia ai batteri!">Caccia ai batteri!</option>
+            <option value="Simulazione della scoperta di un antibiotico">Simulazione scoperta antibiotico</option>
+            <option value="DNA fingerprinting">DNA fingerprinting</option>
+            <option value="Il canestro della prevenzione (AIRC)">Il canestro della prevenzione (AIRC)</option>
+            <option value="Preferisco farmi consigliare dal team ClassLab">Preferisco farmi consigliare</option>
+          `;
+          function generaBloccoClasse5(nomeClasse, idPrefix) {
+            return `
+              <div class="class-card">
+                <div class="class-card-title">🧪 Classe ${nomeClasse}</div>
+                <div class="form-row">
+                  <div class="form-group"><label>Opzione 1</label><select name="op1_${idPrefix}">${opzioniPrimaria5}</select></div>
+                  <div class="form-group"><label>Opzione 2</label><select name="op2_${idPrefix}">${opzioniPrimaria5}</select></div>
+                </div>
+                <div class="form-group" style="margin-bottom:0;"><label>Opzione 3</label><select name="op3_${idPrefix}">${opzioniPrimaria5}</select></div>
+              </div>
+            `;
+          }
+          document.write(generaBloccoClasse5("5ª A", "5a"));
+          document.write(generaBloccoClasse5("5ª B", "5b"));
+          document.write(generaBloccoClasse5("5ª C", "5c"));
+          document.write(generaBloccoClasse5("5ª D", "5d"));
+          document.write(generaBloccoClasse5("5ª E", "5e"));
+        </script>
+      </div>
+
+      <!-- SEZIONE SECONDARIA -->
+      <div id="sezioneSecondaria" class="dynamic-section">
+        <div class="form-section-title" style="margin-top: 0;">Scuola Secondaria - Disciplina</div>
+        <div class="form-group">
+          <label for="disciplinaSecondaria">Disciplina *</label>
+          <select id="disciplinaSecondaria" name="disciplina" onchange="gestisciDisciplina()">
+            <option value="" disabled selected>Seleziona disciplina...</option>
+            <option value="Biologia">Biologia</option>
+            <option value="Fisica">Fisica (ICTP FabLab)</option>
+          </select>
+        </div>
+
+        <div id="boxBiologia" class="dynamic-section" style="display:none; background: #ffffff; border-style: solid; border-color: #e2e8f0;">
+          <div class="disclaimer-box">
+            Selezionare solo le classi che si vogliono iscrivere lasciando in bianco le altre.
+          </div>
+          <div class="class-card">
+            <div class="class-card-title">🧬 Biologia - Seleziona le classi e i laboratori</div>
+            
+            <script>
+              var opzioniBio = `
+                <option value="">-- Seleziona --</option>
+                <option value="Estrazione del DNA della banana">Estrazione del DNA della banana</option>
+                <option value="Isolamento dei pigmenti">Isolamento dei pigmenti</option>
+                <option value="Osservazione di cellule epiteliali umane">Osservazione cellule umane</option>
+                <option value="Caccia ai batteri!">Caccia ai batteri!</option>
+                <option value="Simulazione della scoperta di un antibiotico">Simulazione antibiotico</option>
+                <option value="DNA fingerprinting">DNA fingerprinting</option>
+                <option value="Il canestro della prevenzione (AIRC)">Il canestro della prevenzione (AIRC)</option>
+                <option value="Preferisco farmi consigliare dal team ClassLab">Preferisco farmi consigliare</option>
+              `;
+              function generaBloccoMedieBio(classeNome, prefix) {
+                return `
+                  <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <div style="font-weight: 700; margin-bottom: 10px; color: #0f172a;">Classe ${classeNome}</div>
+                    <div class="form-row">
+                      <div class="form-group"><label>Opzione 1</label><select name="bio_${prefix}_op1">${opzioniBio}</select></div>
+                      <div class="form-group"><label>Opzione 2</label><select name="bio_${prefix}_op2">${opzioniBio}</select></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;"><label>Opzione 3</label><select name="bio_${prefix}_op3">${opzioniBio}</select></div>
+                  </div>
+                `;
+              }
+              document.write("<div style='font-weight:700; color:#0369a1; margin: 15px 0 10px 0;'>Prime Classi</div>");
+              ["1A", "1B", "1C", "1D", "1E", "1F"].forEach(c => document.write(generaBloccoMedieBio(c, c.toLowerCase())));
+              
+              document.write("<div style='font-weight:700; color:#0369a1; margin: 20px 0 10px 0;'>Seconde Classi</div>");
+              ["2A", "2B", "2C", "2D", "2E", "2F"].forEach(c => document.write(generaBloccoMedieBio(c, c.toLowerCase())));
+
+              document.write("<div style='font-weight:700; color:#0369a1; margin: 20px 0 10px 0;'>Terze Classi</div>");
+              ["3A", "3B", "3C", "3D", "3E", "3F"].forEach(c => document.write(generaBloccoMedieBio(c, c.toLowerCase())));
+            </script>
+          </div>
+        </div>
+
+        <div id="boxFisica" class="dynamic-section" style="display:none; background: #ffffff; border-style: solid; border-color: #e2e8f0;">
+          <div class="disclaimer-box">
+            Selezionare solo le classi che si vogliono iscrivere lasciando in bianco le altre.
+          </div>
+          <div class="class-card">
+            <div class="class-card-title">⚡ Fisica - Percorsi per Classe</div>
+            
+            <script>
+              var opzioniFisica = `
+                <option value="">-- Seleziona --</option>
+                <option value="Percorso sulla luce">Percorso sulla luce</option>
+                <option value="Percorso sull'elettromagnetismo">Percorso sull'elettromagnetismo</option>
+                <option value="Preferisco farmi consigliare dal team ClassLab">Preferisco farmi consigliare</option>
+              `;
+              function generaBloccoMedieFisica(classeNome, prefix) {
+                return `
+                  <div class="form-group">
+                    <label>Classe ${classeNome}</label>
+                    <select name="fis_${prefix}"><option value="">-- Seleziona percorso --</option>${opzioniFisica.replace('<option value="">-- Seleziona --</option>', '')}</select>
+                  </div>
+                `;
+              }
+              document.write("<div style='font-weight:700; color:#0369a1; margin: 15px 0 10px 0;'>Prime Classi</div>");
+              ["1A", "1B", "1C", "1D", "1E", "1F"].forEach(c => document.write(generaBloccoMedieFisica(c, c.toLowerCase())));
+
+              document.write("<div style='font-weight:700; color:#0369a1; margin: 20px 0 10px 0;'>Seconde Classi</div>");
+              ["2A", "2B", "2C", "2D", "2E", "2F"].forEach(c => document.write(generaBloccoMedieFisica(c, c.toLowerCase())));
+
+              document.write("<div style='font-weight:700; color:#0369a1; margin: 20px 0 10px 0;'>Terze Classi</div>");
+              ["3A", "3B", "3C", "3D", "3E", "3F"].forEach(c => document.write(generaBloccoMedieFisica(c, c.toLowerCase())));
+            </script>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section-title">3. Disponibilità e note</div>
+      <div class="form-group">
+        <label for="giornate">Giornate disponibili *</label>
+        <textarea id="giornate" name="giornate" placeholder="Tra il 12 dicembre e il 1° marzo..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="note">Note organizzative</label>
+        <textarea id="note" name="note" placeholder="Eventuali esigenze..."></textarea>
+      </div>
+
+      <div class="form-section-title">4. Privacy</div>
+      <div class="privacy-box">
+        I dati forniti saranno trattati da ClassLab ODV per la gestione delle richieste di partecipazione al progetto e l'organizzazione delle attività, nel rispetto del GDPR.
+      </div>
+      <div class="form-group">
+        <label style="display: flex; align-items: flex-start; font-weight: normal; cursor: pointer;">
+          <input type="checkbox" name="privacy" value="Acconsento" required style="width: 20px; height: 20px; margin-right: 12px; margin-top: 2px;">
+          <span style="font-size: 13px; color: #334155;"><strong>Acconsento</strong> al trattamento dei dati personali. *</span>
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="btnInvia">Invia Richiesta di Adesione</button>
+    </form>
+
+    <!-- SEZIONE IN BASSO: PARTECIPA COME STUDENTE -->
+    <div class="student-join-box">
+      Vuoi partecipare come studente? Scrivici un email e verrai ricontattato per entrare a far parte del team!
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Menu mobile toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Gestione campi dinamici del form
+    function gestisciOrdineGrado() {
+      var ordine = document.getElementById("ordineGrado").value;
+      document.getElementById("sezionePrimaria").style.display = (ordine === "Primaria") ? "block" : "none";
+      document.getElementById("sezioneSecondaria").style.display = (ordine === "Secondaria di primo grado") ? "block" : "none";
+    }
+
+    function gestisciDisciplina() {
+      var disc = document.getElementById("disciplinaSecondaria").value;
+      document.getElementById("boxBiologia").style.display = (disc === "Biologia") ? "block" : "none";
+      document.getElementById("boxFisica").style.display = (disc === "Fisica") ? "block" : "none";
+    }
+
+    // Invio via AJAX
+    document.getElementById("classlabForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      var btn = document.getElementById("btnInvia");
+      btn.disabled = true;
+      btn.innerText = "Invio in corso...";
+
+      var urlScript = "https://script.google.com/macros/library/d/1ofVPBHlCjo4oFbUlO9o_3xYFwaPChiHVJh2kqQMkU-h7ZmL1Kh71KdkO/3"; 
+      var formData = new FormData(this);
+
+      fetch(urlScript, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        document.getElementById("classlabForm").innerHTML = `
+          <div style="text-align: center; padding: 40px 20px;">
+            <h3 style="font-family: 'Montserrat', sans-serif; color: #0284c7; font-size: 24px; margin-bottom: 15px;">Richiesta inviata con successo!</h3>
+            <p style="font-family: 'Montserrat', sans-serif; color: #475569; font-size: 15px;">Grazie da ClassLab. Ti ricontatteremo presto!</p>
+          </div>
+        `;
+      })
+      .catch(error => {
+        alert("Errore durante l'invio. Riprova tra poco.");
+        btn.disabled = false;
+        btn.innerText = "Invia Richiesta di Adesione";
+      });
+    });
+  </script>
+
+</body>
+</html>
