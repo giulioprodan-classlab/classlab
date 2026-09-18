@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I nostri laboratori - ClassLab ODV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* --- MENU DI NAVIGAZIONE --- */
+    nav {
+      background-color: #0284c7;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+    .nav-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: white;
+    }
+    .nav-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      opacity: 0.8;
+      font-weight: 600;
+    }
+
+    /* Pulsante Hamburger per Mobile */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 5px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* --- CONTENUTO LABORATORI --- */
+    .classlab-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #0f172a;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    /* Header */
+    .classlab-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .classlab-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .classlab-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.5px;
+    }
+    .classlab-subtitle {
+      font-size: 16px;
+      color: #64748b;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Box "Come funziona" */
+    .classlab-info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 45px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    }
+    .classlab-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+    .classlab-info-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .classlab-info-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .classlab-info-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .classlab-info-text {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Griglia Laboratori */
+    .classlab-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    
+    .badge-scuole {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-top: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .classlab-info-grid {
+        grid-template-columns: 1fr;
+      }
+      .classlab-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      /* Menu a tendina per dispositivi mobili */
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #0284c7;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 25px;
+        gap: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        font-size: 16px;
+        width: 100%;
+        padding: 5px 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .classlab-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DI NAVIGAZIONE -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <img src="icona.png" alt="ClassLab Logo" class="nav-logo-img">
+      <span class="nav-title">ClassLab ODV</span>
+    </a>
+    
+    <!-- Pulsante Menu Mobile -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Apri menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="partecipa.html">Partecipa</a></li>
+      <li><a href="laboratori.html" class="active">I nostri laboratori</a></li>
+      <li><a href="edizioni.html">Edizioni passate</a></li>
+      <li><a href="chisiamo.html">Chi siamo</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENUTO PRINCIPALE LABORATORI -->
+  <div class="classlab-container">
+
+    <!-- INTESTAZIONE -->
+    <div class="classlab-header">
+      <span class="classlab-badge">ClassLab • Attività e Laboratori</span>
+      <h1 class="classlab-title">I nostri esperimenti scientifici</h1>
+      <p class="classlab-subtitle">Un viaggio pratico e interattivo nel mondo della scienza, pensato per portare la biologia e la ricerca sperimentale direttamente tra i banchi di scuola.</p>
+    </div>
+
+    <!-- SEZIONE COME FUNZIONA -->
+    <div class="classlab-info-box">
+      <div style="text-align: center; margin-bottom: 25px;">
+        <h2 style="font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 6px 0;">Come funziona il percorso</h2>
+        <p style="font-size: 14px; color: #64748b; margin: 0;">Tutto quello che c'è da sapere sulle nostre attività laboratoriali nelle scuole.</p>
+      </div>
+      
+      <div class="classlab-info-grid">
+        <div class="classlab-info-card">
+          <div class="classlab-info-icon">⏱️</div>
+          <div class="classlab-info-title">Durata e Orario</div>
+          <p class="classlab-info-text">Le attività si svolgono direttamente durante l'orario scolastico. Ogni incontro ha una durata di circa due ore, strutturate in moduli dinamici e su misura.</p>
+        </div>
+
+        <div class="classlab-info-card">
+          <div class="classlab-info-icon">🧪</div>
+          <div class="classlab-info-title">I Moduli Sperimentali</div>
+          <p class="classlab-info-text">Ogni percorso include tre esperimenti scelti tra quelli disponibili, calibrati in base all'età, al livello di preparazione e al programma delle classi.</p>
+        </div>
+
+        <div class="classlab-info-card">
+          <div class="classlab-info-icon">🎁</div>
+          <div class="classlab-info-title">100% Gratuito</div>
+          <p class="classlab-info-text">Crediamo fermamente che la divulgazione scientifica debba essere accessibile a tutti: la partecipazione ai laboratori è completamente gratuita per le scuole.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRIGLIA ESPERIMENTI -->
+    <div style="margin-bottom: 20px;">
+      <h2 style="font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 5px 0; text-align: center;">Il catalogo dei laboratori</h2>
+      <p style="font-size: 14px; color: #64748b; margin: 0 0 25px 0; text-align: center;">Esplora gli esperimenti che compongono i nostri percorsi didattici.</p>
+    </div>
+
+    <div class="classlab-grid">
+
+      <!-- Card 1: Estrazione DNA -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1zpwDt3qk4Mxi1NFjB5AwdPIuGA0lCiyE=s800" alt="Estrazione DNA" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Estrazione del DNA vegetale</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Estrai il DNA dalla polpa di banana: un filo invisibile che racchiude tutte le istruzioni della vita.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Cellule vegetali -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/15eq5k2s-HTl4-nle_sf8jDSotD-9tT8z=s800" alt="Cellule vegetali" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Cellule vegetali al microscopio</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Prepara vetrini di cipolla per osservare pareti cellulari e nuclei da un punto di vista inedito.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Cellule umane -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/12p6b4FNwcsVtov75_y3vcuFJzyK15AM4=s800" alt="Cellule umane" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Cellule umane al microscopio</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Analizza le tue cellule della mucosa orale per scoprire le unità microscopiche che ci compongono.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Batteri -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1Crf3XHbmwBVCzHKhE9NMUvwkSo-E5XbO=s800" alt="Batteri" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Coltura di batteri ambientali</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Gioca al detective e scopri i micro-mondi nascosti sulle superfici coltivando i batteri che le popolano.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Pigmenti -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1kEqY32aMQdmrJRM9_zgmYvld5_7WmfLf=s800" alt="Pigmenti foglie" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Pigmenti e fotosintesi</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Isola i colori nascosti delle foglie per svelare i segreti della fotosintesi e della vita vegetale.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Antibiotici -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1wo45iN9bENFGZse6v7_kNhjlDasVIIXe=s800" alt="Antibiotici" style="width: 100%; height: 160px; object-fit: cover; object-position: center 35%;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Resistenza agli antibiotici</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Osserva l'azione sui batteri e comprendi l'importanza di un uso consapevole dei farmaci.</p>
+          </div>
+          <div>
+            <span class="badge-scuole">Consigliato: scuole secondarie di 1° grado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7: Digestione -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1oZk4TtaR3gSRJ1GJ1FKJZI3bgBOKVU_m=s800" alt="Digestione" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">I processi digestivi</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Simula la digestione e scopri come gli enzimi scompongono i cibi nel nostro organismo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8: Elettroforesi -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1_6hCMX6ajFCW7xB24isBbWCJXjw_4jun=s800" alt="Elettroforesi" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Il DNA al servizio della giustizia</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Scopri le basi della profilazione del DNA e come questa ha influenzato la giustizia immergendoti nel mondo di CSI.</p>
+          </div>
+          <div>
+            <span class="badge-scuole">Consigliato: scuole secondarie di 1° grado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9: Airc -->
+      <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <img src="https://lh3.googleusercontent.com/d/1kUGO5cUmPZfW5ijMHd4MIZQok9WI8fgH=s800" alt="Prevenzione AIRC" style="width: 100%; height: 160px; object-fit: cover;">
+        <div style="padding: 18px;">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Il canestro della prevenzione</h3>
+            <p style="font-size: 13px; color: #64748b; line-height: 1.4; margin: 0;">Un percorso formativo sviluppato con AIRC per promuovere stili di vita sani e attivi tra i giovani.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT PER IL MENU MOBILE -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Chiude il menu quando si clicca un link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
